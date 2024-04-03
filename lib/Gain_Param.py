@@ -7,6 +7,7 @@ import socket
 class Gain_Param():
     Get_back = [0,0,0,0,0] # Returns the memory of Disk     返回Disk的内存
     flag = 0 # Unmounted or unpartitioned   未挂载还是未分区
+    eth = os.popen("find /sys/class/net -type l -not -lname '*virtual*' -printf '%f\n' -quit").read().strip()
     def GET_IP(self):
         #会存在异常  卡死   谨慎获取  
         #There will be exceptions, get stuck, get it carefully
@@ -38,7 +39,7 @@ class Gain_Param():
                 return line.rstrip().split(':')[1].split()[which_num]
 
     def RX_speed(self):
-        interface = 'eth0'
+        interface = self.eth
         is_upload = True#False 
         get_time = 0.1
         # Computation part 计算部分
@@ -48,7 +49,7 @@ class Gain_Param():
         return ((end-begin) /get_time/1024)
         
     def TX_speed(self):
-        interface = 'eth0'
+        interface = self.eth
         is_upload = False 
         get_time = 0.1
         # Computation part 计算部分
