@@ -7,7 +7,10 @@ import time
 import logging
 import spidev as SPI
 import RPi.GPIO as GPIO
-os.chdir(sys.path[0])
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from lib import LCD_2inch
